@@ -1,4 +1,4 @@
-import datetime, psycopg2,csv,json,requests,  os, sys, argparse
+import datetime, psycopg2, csv, json,requests,  os, sys, argparse
 from os.path import join, dirname
 from dotenv import load_dotenv
 from pytz import utc
@@ -8,12 +8,14 @@ from apscheduler.jobstores.sqlalchemy import SQLAlchemyJobStore
 from apscheduler.executors.pool import ProcessPoolExecutor
 from apscheduler.executors.pool import ThreadPoolExecutor
 
+parser = argparse.ArgumentParser()
+parser.add_argument('-mi','--minutes', help='Minutes',required=True)
+args = parser.parse_args()
+
+MINUTES = int(args.minutes)
+
 dotenv_path = join(dirname(__file__), '.env')
 load_dotenv(dotenv_path)
-
-arser = argparse.ArgumentParser()
-parser.add_argument('-period','--periood', help='Period in minutes',required=True)
-args = parser.parse_args()
 
 DBNAME = os.getenv('DBNAME')
 DBUSER = os.getenv('DBUSER')
@@ -25,20 +27,20 @@ def dictfetchall(cursor):
     columns = [col[0] for col in cursor.description]
     return [dict(zip(columns, row)) for row in cursor.fetchall()]
 
-def getBitoInfo():
+def getBitcoinInfo():
     return [] 
 
 def analyze(cursor):
-    for quota in getBitoInfo(cursor):
+    for quota in getBitcoinInfo(cursor):
         try:
             new_state = get_quota_state(quota)
-            cursor.execute("""
-                UPDATE quotas.storekeeper_quotas SET quota_state_id = '{0}' where id = {1}
-            """.format(new_state, quota['id']))
-            print quota, new_state
+            cursor.execute(
+                "UPDATE quotas.storekeeper_quotas SET quota_state_id = '{0}' where id = {1}"
+            .format(new_state, quota['id']))
+            print(quota, new_state)
         except Exception as e:
-            print e.message
-    print "End looking on bitso ..."
+            print(e.message)
+    print("End looking on bitso ...")
 
 def init():
     gyconnector = psycopg2.connect(database = DBNAME, user = DBUSER, password = DBPASSWORD, host = DBHOST, port = DBPORT)
@@ -46,6 +48,8 @@ def init():
     cursor = gyconnector.cursor()
     analyze(cursor)
     gyconnector.close()
+
+print("Cron Started ...")
 
 jobstores = {
     'default': SQLAlchemyJobStore(url='sqlite:///jobs.sqlite')
@@ -59,5 +63,5 @@ job_defaults = {
     'max_instances': 10
 }
 scheduler = BlockingScheduler(executors=executors, job_defaults=job_defaults, timezone=utc)
-scheduler.add_job(init, 'cron', hour=hour)
+scheduler.add_job(init, 'cron', minute=MINUTES)
 scheduler.start()
