@@ -33,16 +33,20 @@ services:
     command: python scheduler.py
     depends_on: 
       - api
+    environment:
+      - BITSO_API=https://api.bitso.com
+      - BACKUP_API=http://localhost:3000
+      - AUTHORIZATION=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 
-  dashboard:
-    image: node:carbon
-    container_name: bitso_dashboard
-    working_dir: /home/src/app/
-    build: ./dashboard
-    command: npm run serve
-    ports:
-      - "8080:8080"
-    expose:
-      - "8080"
-    depends_on: 
-      - api
+ # dashboard:
+    #image: node:carbon
+    #container_name: bitso_dashboard
+    #working_dir: /home/src/app/
+    #build: ./dashboard
+    #command: npm run serve
+    #ports:
+    #  - "8080:8080"
+    #expose:
+    #  - "8080"
+    #depends_on: 
+    #  - api

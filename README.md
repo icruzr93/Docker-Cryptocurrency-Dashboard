@@ -11,3 +11,5 @@ Here is a run-down of the core technologies used in this project.
 3. [DASHBOARD - REACT](https://reactjs.org/) - A very popular JavaScript DOM rendering framework for building scalable web applications using a component-based architecture.
 
 4. [DATABASE - POSTGRESQL](https://www.postgresql.org/) - The world's most advanced open source database
+
+5. [Docker](https://www.docker.com/) - ocker is an open platform for developers and sysadmins to build, ship, and run distributed applications, whether on laptops, data center VMs, or the cloud.

@@ -1,6 +1,6 @@
 from apscheduler.schedulers.blocking import BlockingScheduler
 
-import datetime, psycopg2, csv, json,requests,  os, sys, argparse
+import datetime, csv, json,requests,  os, sys, argparse
 from os.path import join, dirname
 from dotenv import load_dotenv
 from pytz import utc
