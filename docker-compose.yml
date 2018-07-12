@@ -28,7 +28,7 @@ services:
     environment:
       - NODE_ENV="https://api.bitso.com"
       - JWT_SECRET="http://localhost:3000"
-      - DATABASE_URL="postgres://postgres:1234@localhost:5432/postgres"
+      - DATABASE_URL="postgres://postgres:1234@db:543/postgres"
 
   #backup:
     #image: python:3.6.4

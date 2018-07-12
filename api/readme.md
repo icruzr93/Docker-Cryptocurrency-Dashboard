@@ -7,7 +7,7 @@
 - docker build -t bitso-statisticis/api .
 - docker run -t -i \
     -e NODE_ENV='https://api.bitso.com' \
-    -e JWT_SECRET='http://localhost:3000' \
+    -e JWT_SECRET='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9' \
     -e DATABASE_URL='postgres://postgres:1234@localhost:5432/postgres' \
     -p 3000:3000 \
     bitso-statisticis/api
