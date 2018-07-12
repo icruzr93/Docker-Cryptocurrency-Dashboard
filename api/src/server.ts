@@ -10,6 +10,7 @@ import 'reflect-metadata';
 import * as PostgressConnectionStringParser from 'pg-connection-string';
 
 import { User } from './entity/user';
+import { Exchange } from './entity/exchange';
 import { logger } from './logging';
 import { config } from './config';
 import { router } from './routes';
@@ -33,7 +34,8 @@ createConnection({
     synchronize: true,
     logging: false,
     entities: [
-       'dist/entity/**/*.js'
+       User,
+       Exchange
     ],
     extra: {
         ssl: config.dbsslconn, // if not development, will use SSL
@@ -55,7 +57,7 @@ createConnection({
     app.use(bodyParser());
 
     // JWT middleware -> below this line routes are only reached if JWT token is valid, secret as env variable
-    app.use(jwt({ secret: config.jwtSecret }));
+    // app.use(jwt({ secret: config.jwtSecret }));
 
     // this routes are protected by the JWT middleware, also include middleware to respond with "Method Not Allowed - 405".
     app.use(router.routes()).use(router.allowedMethods());

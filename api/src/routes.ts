@@ -14,4 +14,9 @@ router.post('/users', controller.user.createUser);
 router.put('/users/:id', controller.user.updateUser);
 router.delete('/users/:id', controller.user.deleteUser);
 
+// EXCHANGE ROUTES
+router.get('/exchange', controller.exchange.getExchange);
+router.get('/exchange/:id', controller.exchange.getSingleExchange);
+router.post('/exchange', controller.exchange.createExchange);
+
 export { router };

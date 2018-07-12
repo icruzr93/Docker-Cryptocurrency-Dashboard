@@ -2,17 +2,19 @@ version: "3"
 
 services:
 
-  dashboard:
-    image: node:carbon
-    build: ./dashboard
-    command: npm run start
+  db:
+    image: postgres:9.4
     ports:
-      - 8080:8080
+      - 5432:5432
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: pass
+      POSTGRES_DB: apidb
   
   api:
     image: node:carbon
     build: ./api
-    command: npm run start
+    command: npm run build && npm run serve
     depends_on: 
       - db
     ports:
@@ -23,13 +25,13 @@ services:
     build: ./backup
     command: pip install -r requirements.txt && python scheduler.py -mi 1
     depends_on: 
-      - db
+      - api
 
-  db:
-    image: postgres:9.4
+  dashboard:
+    image: node:carbon
+    build: ./dashboard
+    command: npm run start
     ports:
-      - 5432:5432
-    environment:
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: pass
-      POSTGRES_DB: apidb
+      - 8080:8080
+    depends_on: 
+      - api
