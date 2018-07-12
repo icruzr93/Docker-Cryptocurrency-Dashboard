@@ -15,5 +15,6 @@
 ## Development
 
 ``` #!/bin/bash
+- cp .env.example
 - python scheduler.py
 ```
