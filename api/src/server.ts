@@ -38,7 +38,7 @@ createConnection({
        Exchange
     ],
     extra: {
-        ssl: config.dbsslconn, // if not development, will use SSL
+        // ssl: config.dbsslconn, if not development, will use SSL
     }
  }).then(async connection => {
 

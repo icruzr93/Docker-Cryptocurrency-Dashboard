@@ -2,7 +2,7 @@ version: "3"
 
 services:
 
-  db:
+  bitso_db:
     image: postgres:9.4
     container_name: bitso_posgresql
     ports:
@@ -14,13 +14,13 @@ services:
       POSTGRES_PASSWORD: 1234
       POSTGRES_DB: postgres
   
-  api:
+  bitso_api:
     image: node:carbon
     container_name: bitso_api
     build: ./api
     command: npm run serve
     depends_on: 
-      - db
+      - bitso_db
     ports:
       - "3000:3000"
     expose:
@@ -28,18 +28,19 @@ services:
     environment:
       NODE_ENV: https://api.bitso.com
       JWT_SECRET: http://localhost:3000
-      DATABASE_URL: postgres://postgres:1234@db:543/postgres
+      DATABASE_URL: postgres://postgres:1234@bitso_db:5432/postgres
 
-  #backup:
-    #image: python:3.6.4
-    #container_name: bitso_backup
-    #build: ./backup
-    #depends_on: 
-    #  - api
-    #environment:
-    #  - BITSO_API="https://api.bitso.com"
-    #  - BACKUP_API="http://localhost:3000"
-    #  - AUTHORIZATION="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9"
+  backup:
+    image: python:3.6.4
+    container_name: bitso_backup
+    build: ./backup
+    command: python scheduler.py
+    depends_on: 
+      - bitso_api
+    environment:
+      BITSO_API: https://api.bitso.com
+      BACKUP_API: http://bitso_api:3000
+      AUTHORIZATION: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 
  # dashboard:
     #image: node:carbon
