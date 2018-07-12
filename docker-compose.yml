@@ -7,14 +7,15 @@ services:
     ports:
       - 5432:5432
     environment:
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: pass
-      POSTGRES_DB: apidb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: postgres
   
   api:
     image: node:carbon
+    working_dir: /home/node/app
     build: ./api
-    command: npm run build && npm run serve
+    command: npm run serve
     depends_on: 
       - db
     ports:
@@ -22,15 +23,17 @@ services:
 
   backup:
     image: python:3.6.4
+    working_dir: /home/python/app
     build: ./backup
-    command: pip install -r requirements.txt && python scheduler.py -mi 1
+    command: run.sh
     depends_on: 
       - api
 
   dashboard:
     image: node:carbon
+    working_dir: /home/node/app
     build: ./dashboard
-    command: npm run start
+    command: npm run serve
     ports:
       - 8080:8080
     depends_on: 

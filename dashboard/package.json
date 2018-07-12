@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "serve": "npm install &&  npm run start",
     "build": "webpack --config webpack.config.js --mode production",
     "start": "webpack-dev-server --mode development"
   },
