@@ -8,7 +8,7 @@
     "build-ts": "tsc",
     "tslint": "tslint -c tslint.json -p tsconfig.json",
     "build": "npm run tslint && npm run build-ts",
-    "serve": "npm run build && node dist/server.js",
+    "serve": "npm install && npm run build && node dist/server.js",
     "start": "npm run serve"
   },
   "engines": {

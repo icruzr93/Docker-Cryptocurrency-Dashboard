@@ -2,8 +2,6 @@ APScheduler==3.5.1
 certifi==2018.4.16
 chardet==3.0.4
 idna==2.7
-psycopg2==2.7.5
-psycopg2-binary==2.7.5
 python-dotenv==0.8.2
 pytz==2018.5
 requests==2.19.1

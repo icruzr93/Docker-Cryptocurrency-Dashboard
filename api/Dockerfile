@@ -10,5 +10,5 @@ COPY package.json /home/src/app/
 # Bundle app source
 COPY . /home/src/app/
 
-EXPOSE 8080
+EXPOSE 3000
 CMD [ "npm", "run", "serve" ]

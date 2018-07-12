@@ -4,6 +4,7 @@ services:
 
   db:
     image: postgres:9.4
+    container_name: bitso_posgresql
     ports:
       - 5432:5432
     environment:
@@ -13,28 +14,35 @@ services:
   
   api:
     image: node:carbon
-    working_dir: /home/node/app
+    container_name: bitso_api
+    working_dir: /home/src/app/
     build: ./api
     command: npm run serve
     depends_on: 
       - db
     ports:
       - 3000:3000
+    expose:
+      - "3000"
 
   backup:
     image: python:3.6.4
-    working_dir: /home/python/app
+    container_name: bitso_backup
+    working_dir: /home/src/app
     build: ./backup
-    command: run.sh
+    command: python scheduler.py
     depends_on: 
       - api
 
   dashboard:
     image: node:carbon
-    working_dir: /home/node/app
+    container_name: bitso_dashboard
+    working_dir: /home/src/app/
     build: ./dashboard
     command: npm run serve
     ports:
       - 8080:8080
+    expose:
+      - "8080"
     depends_on: 
       - api

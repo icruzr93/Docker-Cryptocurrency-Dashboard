@@ -8,22 +8,17 @@ from apscheduler.jobstores.sqlalchemy import SQLAlchemyJobStore
 from apscheduler.executors.pool import ProcessPoolExecutor
 from apscheduler.executors.pool import ThreadPoolExecutor
 
-parser = argparse.ArgumentParser()
-parser.add_argument('-mi','--minutes', help='Minutes',required=True)
-args = parser.parse_args()
-
-MINUTES = int(args.minutes)
-
 dotenv_path = join(dirname(__file__), '.env')
 load_dotenv(dotenv_path)
 
 DBNAME = os.getenv('DBNAME')
+MINUTES = 10
 
 def getBitcoinInfo():
     return [] 
 
-def analyze(cursor):
-    for quota in getBitcoinInfo(cursor):
+def analyze():
+    for quota in getBitcoinInfo():
         try:
             print(quota)
         except Exception as e:
