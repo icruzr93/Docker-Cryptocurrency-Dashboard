@@ -6,7 +6,7 @@ services:
     image: postgres:9.4
     container_name: bitso_posgresql
     ports:
-      - 5432:5432
+      - "5432:5432"
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 1234
@@ -21,7 +21,7 @@ services:
     depends_on: 
       - db
     ports:
-      - 3000:3000
+      - "3000:3000"
     expose:
       - "3000"
 
@@ -41,7 +41,7 @@ services:
     build: ./dashboard
     command: npm run serve
     ports:
-      - 8080:8080
+      - "8080:8080"
     expose:
       - "8080"
     depends_on: 
