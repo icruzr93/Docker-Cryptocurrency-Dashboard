@@ -1,9 +1,11 @@
 from apscheduler.schedulers.blocking import BlockingScheduler
-
 import datetime, csv, json,requests,  os, sys, argparse
 from os.path import join, dirname
 from dotenv import load_dotenv
 from pytz import utc
+
+import logging
+logging.basicConfig()
 
 dotenv_path = join(dirname(__file__), '.env')
 load_dotenv(dotenv_path)

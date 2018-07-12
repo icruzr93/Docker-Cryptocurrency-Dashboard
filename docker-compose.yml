@@ -39,7 +39,7 @@ services:
       - bitso_api
     environment:
       BITSO_API: https://api.bitso.com
-      BACKUP_API: http://bitso_api:3000
+      BACKUP_API: bitso_api:3000
       AUTHORIZATION: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 
  # dashboard:
