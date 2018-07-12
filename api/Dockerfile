@@ -1,14 +1,15 @@
 FROM node:carbon
 
 # Create app directory
-RUN mkdir -p /home/src/app
-WORKDIR /home/src/app
-
-# Install app dependencies
-COPY package.json /home/src/app/
+RUN mkdir -p /app
+WORKDIR /app
 
 # Bundle app source
-COPY . /home/src/app/
+ADD package.json /app
+ADD . /app
 
+# Set the command to start the node server.
+CMD npm run serve
+
+# Tell Docker about the port we'll run on.
 EXPOSE 3000
-CMD [ "npm", "run", "serve" ]

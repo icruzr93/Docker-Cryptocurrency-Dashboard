@@ -1,5 +1,27 @@
 # compose-bitso-statistics
 
+## Getting Started
+
+### Prerequisites
+
+- docker
+- docker-compose
+- npm (only-development)
+- python (only-development)
+
+## Running
+
+You can run the whole project using docker-compose, however you can run each project individually accesing inside the projects folder and follow the readme instructions.
+
+## Docker
+
+``` #!/bin/bash
+- cd path/project
+- docker-compose up --force-recreate
+```
+
+Go to http://localhost:3000
+
 ## Built With
 
 Here is a run-down of the core technologies used in this project.
