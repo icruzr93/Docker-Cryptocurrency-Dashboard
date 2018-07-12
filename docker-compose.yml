@@ -17,7 +17,6 @@ services:
   api:
     image: node:carbon
     container_name: bitso_api
-    working_dir: /app/
     build: ./api
     command: npm run serve
     depends_on: 
@@ -29,12 +28,11 @@ services:
     environment:
       - NODE_ENV="https://api.bitso.com"
       - JWT_SECRET="http://localhost:3000"
-      - DATABASE_URL="postgres://postgres:1234@db:5432/postgres"
+      - DATABASE_URL="postgres://postgres:1234@localhost:5432/postgres"
 
   #backup:
     #image: python:3.6.4
     #container_name: bitso_backup
-    #working_dir: /home/src/app
     #build: ./backup
     #depends_on: 
     #  - api
@@ -46,7 +44,6 @@ services:
  # dashboard:
     #image: node:carbon
     #container_name: bitso_dashboard
-    #working_dir: /home/src/app/
     #build: ./dashboard
     #command: npm run serve
     #ports:
