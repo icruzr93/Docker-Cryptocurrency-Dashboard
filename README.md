@@ -16,9 +16,18 @@ You can run the whole project using docker-compose, however you can run each pro
 
 ## Docker
 
+Run
+
 ``` #!/bin/bash
 - cd path/project
 - docker-compose up -d
+```
+
+Stop
+
+``` #!/bin/bash
+- cd path/project
+- docker-compose stop
 ```
 
 [PostgreSQL] - Go to http://localhost:5432
