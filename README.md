@@ -37,7 +37,6 @@ Each project has a readme file to develop in an isolated way.
 ## Applications
 
 1. [Dashboard] - Go to http://localhost:5000
-2. [API] - Go to http://localhost:3000
 
 ## Database
 
@@ -49,10 +48,11 @@ HOST:localhost
 
 ## Endpoints
 
+1. [API] - http://localhost:3000
+
 | method             | resource         | description                                                                                    |
 |:-------------------|:-----------------|:-----------------------------------------------------------------------------------------------|
 | `GET`              | `/`              | Simple hello world response                                                                    |
-| `GET`              | `/jwt`           | Dummy endpoint to show how JWT info gets stored in ctx.state                                   |
 | `GET`              | `/exchange`      | returns the collection of exchanges in the DB                                                  |
 | `GET`              | `/exchange/:id`  | returns an specific exchange from the DB                                                       |
 | `POST`             | `/exchange`      | Save new exchange                                                                              |
