@@ -6,6 +6,7 @@
 
 - docker
 - docker-compose
+- nodejs (only-development)
 - npm (only-development)
 - python (only-development)
 
@@ -19,7 +20,6 @@ You can run the whole project using docker-compose, however you can run each pro
 - cd path/project
 - docker-compose up -d
 ```
-
 
 [PostgreSQL] - Go to http://localhost:5432
 [Dashboard] - Go to http://localhost:5000
@@ -37,4 +37,4 @@ Here is a run-down of the core technologies used in this project.
 
 4. [DATABASE - POSTGRESQL](https://www.postgresql.org/) - The world's most advanced open source database
 
-5. [Docker](https://www.docker.com/) - ocker is an open platform for developers and sysadmins to build, ship, and run distributed applications, whether on laptops, data center VMs, or the cloud.
+5. [Docker](https://www.docker.com/) - Docker is an open platform for developers and sysadmins to build, ship, and run distributed applications, whether on laptops, data center VMs, or the cloud.
