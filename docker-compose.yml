@@ -44,7 +44,7 @@ services:
       MINUTES: 1
 
   bitso_dashboard:
-    image: node:carbon
+    image: node:8.9-alpine
     container_name: bitso_dashboard
     build: ./dashboard
     command: serve -s build
