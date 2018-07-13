@@ -30,6 +30,10 @@ Stop
 - docker-compose stop
 ```
 
+## Development
+
+Each project has a readme file to develop in an isolated way.
+
 ## Applications
 
 1. [PostgreSQL] - Go to http://localhost:5432
