@@ -4,8 +4,10 @@ from os.path import join, dirname
 from dotenv import load_dotenv
 from pytz import utc
 
-import logging
-logging.basicConfig()
+from apscheduler.schedulers.blocking import BlockingScheduler
+from apscheduler.jobstores.sqlalchemy import SQLAlchemyJobStore
+from apscheduler.executors.pool import ProcessPoolExecutor
+from apscheduler.executors.pool import ThreadPoolExecutor
 
 dotenv_path = join(dirname(__file__), '.env')
 load_dotenv(dotenv_path)
@@ -13,7 +15,7 @@ load_dotenv(dotenv_path)
 BITSO_API = os.getenv('BITSO_API') + '/v3/ticker/'
 EXCHANGE_API = os.getenv('BACKUP_API') + '/exchange'
 AUTHORIZATION = os.getenv('AUTHORIZATION')
-MINUTES = 10
+MINUTES = os.getenv('MINUTES')
 
 books = [
     "btc_mxn", "eth_mxn", "xrp_btc", "xrp_mxn", "eth_btc", "ltc_btc", "ltc_mxn", "bch_mxn", "tusd_btc", "tusd_mxn"
@@ -46,7 +48,6 @@ def analyze():
     for book in books:
         try:
             data = getExchange(book)
-            print(data)
             insert = postExchange(data['payload'])
             print(insert)
         except Exception as e:
@@ -55,6 +56,6 @@ def analyze():
 analyze()
 print("Cron Started ...")
 
-scheduler = BlockingScheduler()
-scheduler.add_job(analyze, 'cron', minute=MINUTES)
+scheduler = BlockingScheduler(timezone=utc)
+scheduler.add_job(analyze, 'interval', minutes=MINUTES)
 scheduler.start()

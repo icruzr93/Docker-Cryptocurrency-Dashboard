@@ -27,7 +27,7 @@ services:
       - "3000"
     environment:
       NODE_ENV: https://api.bitso.com
-      JWT_SECRET: http://localhost:3000
+      JWT_SECRET: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
       DATABASE_URL: postgres://postgres:1234@bitso_db:5432/postgres
 
   backup:
@@ -39,17 +39,16 @@ services:
       - bitso_api
     environment:
       BITSO_API: https://api.bitso.com
-      BACKUP_API: bitso_api:3000
+      BACKUP_API: http://bitso_api:3000
       AUTHORIZATION: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+      MINUTES: 1
 
- # dashboard:
-    #image: node:carbon
-    #container_name: bitso_dashboard
-    #build: ./dashboard
-    #command: npm run serve
-    #ports:
-    #  - "8080:8080"
-    #expose:
-    #  - "8080"
-    #depends_on: 
-    #  - api
+  dashboard:
+    image: node:carbon
+    container_name: bitso_dashboard
+    build: ./dashboard
+    command: node:8.9-alpine
+    ports:
+      - "5000:5000"
+    depends_on: 
+      - api

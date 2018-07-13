@@ -1,14 +1,27 @@
-FROM node:carbon
+FROM node:8.9-alpine
+
+# Override the base log level (info).
+ENV NPM_CONFIG_LOGLEVEL warn
 
 # Create app directory
-RUN mkdir -p /home/src/app
-WORKDIR /home/src/app
-
-# Install app dependencies
-COPY package.json /home/src/app/
+RUN mkdir -p /app
+WORKDIR /app
 
 # Bundle app source
-COPY . /home/src/app/
+ADD package.json /app
+ADD . /app
 
-EXPOSE 8080
-CMD [ "npm", "run", "serve" ]
+# Install dependences.
+RUN npm install
+
+# Run build
+RUN npm run build --production
+
+# Install `serve` to run the application.
+RUN npm install -g serve
+
+# Set the command to start the node server.
+CMD serve -s build
+
+# Tell Docker about the port we'll run on.
+EXPOSE 5000
