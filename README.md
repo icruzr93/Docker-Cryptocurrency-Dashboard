@@ -1,4 +1,4 @@
-# compose-bitso-statistics
+# BITSO STATISTICS
 
 ## Getting Started
 
