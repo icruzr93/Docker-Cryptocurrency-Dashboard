@@ -17,10 +17,13 @@ You can run the whole project using docker-compose, however you can run each pro
 
 ``` #!/bin/bash
 - cd path/project
-- docker-compose up --force-recreate
+- docker-compose up -d
 ```
 
-Go to http://localhost:3000
+
+[PostgreSQL] - Go to http://localhost:5432
+[Dashboard] - Go to http://localhost:5000
+[API] - Go to http://localhost:3000
 
 ## Built With
 
