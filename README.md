@@ -6,6 +6,7 @@
 
 - docker
 - docker-compose
+- postgresql (only-development)
 - nodejs (only-development)
 - npm (only-development)
 - python (only-development)
