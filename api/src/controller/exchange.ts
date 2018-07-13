@@ -27,6 +27,15 @@ export default class ExchangeController {
 
     }
 
+    public static async getBookExchanges (ctx: BaseContext) {
+        const exchanteRepository: Repository<Exchange> = getManager().getRepository(Exchange);
+        const exchange: Exchange[] = await exchanteRepository.find({where : {book: ctx.params.book || ''}});
+
+        ctx.status = 200;
+        ctx.body = exchange;
+
+    }
+
     public static async createExchange (ctx: BaseContext) {
 
         const exchangeRepository: Repository<Exchange> = getManager().getRepository(Exchange);

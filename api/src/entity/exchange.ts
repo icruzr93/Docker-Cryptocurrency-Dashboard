@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, Index } from 'typeorm';
 import { Length } from 'class-validator';
 
 @Entity()
@@ -6,6 +6,7 @@ export class Exchange {
     @PrimaryGeneratedColumn()
     id: number;
 
+    @Index()
     @Column({length: 80})
     @Length(4, 80)
     book: string;

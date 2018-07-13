@@ -19,4 +19,6 @@ router.get('/exchange', controller.exchange.getExchange);
 router.get('/exchange/:id', controller.exchange.getSingleExchange);
 router.post('/exchange', controller.exchange.createExchange);
 
+router.get('/book/:book', controller.exchange.getBookExchanges);
+
 export { router };
