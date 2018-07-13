@@ -43,12 +43,12 @@ services:
       AUTHORIZATION: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
       MINUTES: 1
 
-  dashboard:
+  bitso_dashboard:
     image: node:carbon
     container_name: bitso_dashboard
     build: ./dashboard
-    command: node:8.9-alpine
+    command: serve -s build
     ports:
       - "5000:5000"
     depends_on: 
-      - api
+      - bitso_api
