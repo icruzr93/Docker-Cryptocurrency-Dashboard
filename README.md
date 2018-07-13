@@ -40,11 +40,11 @@ Each project has a readme file to develop in an isolated way.
 
 ## Database
 
-DATABASE:postgres
-USER:postgres
-PASSWORD:1234
-PORT:5432
-HOST:localhost
+- DATABASE:postgres
+- USER:postgres
+- PASSWORD:1234
+- PORT:5432
+- HOST:localhost
 
 ## Endpoints
 
